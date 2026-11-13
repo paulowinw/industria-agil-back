@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PecaController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,9 @@ Route::prefix('v1')->group(function () {
 
         Route::apiResource('users', UserController::class)
             ->middleware('can:manage-users');
+
+        Route::apiResource('pecas', PecaController::class);
+        Route::get('/pecas/{peca}/files/{field}', [PecaController::class, 'download'])
+            ->name('pecas.files.show');
     });
 });
