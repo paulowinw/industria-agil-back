@@ -7,6 +7,24 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Local development with Docker
+
+Start the application and MySQL with Docker Compose:
+
+```bash
+test -f .env || cp .env.example .env
+docker compose up --build
+```
+
+On a fresh setup, generate an application key once if `APP_KEY` is empty. Then run the database migrations:
+
+```bash
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate
+```
+
+Open [http://localhost:8001](http://localhost:8001). If host ports are already in use, set alternatives when starting Compose, for example `APP_PORT=8002 MYSQL_FORWARD_PORT=3307 docker compose up --build`. Vite is not run by Docker Compose; run the frontend dev server separately if needed. The default development database is MySQL 8.4; its data persists in a Docker volume. Use `docker compose down` to stop the services. The default database credentials in `compose.yaml` are for local development only.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
