@@ -29,3 +29,6 @@ Thumbs.db
 composer.lock
 package-lock.json
 yarn.lock
+
+tests/Feature/AdminUserSeederTest.php
+database/seeders/AdminUserSeeder.php
